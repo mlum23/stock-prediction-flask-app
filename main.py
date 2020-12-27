@@ -3,5 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 
-print(pdr.get_data_yahoo('MSFT'))
+pd.set_option("display.max_columns", 100)
+stock_open = pdr.get_data_yahoo('MSFT')['Open']
+
+# Last 30 days
+stock_open_last_30 = stock_open[len(stock_open) - 30:len(stock_open)]
+
+plt.plot(stock_open_last_30)
+plt.show()
+
+
+
 
