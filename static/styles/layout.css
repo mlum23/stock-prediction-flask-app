@@ -3,4 +3,5 @@ body {
     background: lightyellow;
     display: grid;
     place-items: center;
+    text-align: center;
 }
