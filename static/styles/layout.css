@@ -1,9 +1,6 @@
 body {
     font-family: 'Lato', sans-serif;
     background: lightyellow;
-}
-
-#container {
     display: grid;
     place-items: center;
 }

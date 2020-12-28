@@ -1,26 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Stock Prediction</title>
-<!--    <link rel="stylesheet" href="./index.css">-->
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
     <div id="container">
         <h1>Stock Predictions</h1>
 
+        <p><strong>Enter stock name:</strong></p>
         <form method="POST">
-            <span>
-                Enter stock name:
-                <input name="stock-name" value="MSFT">
-                <input type="submit">
-            </span>
-
+            <input name="stock-name">
+            <input type="submit">
+            <p>{{error}}</p>
         </form>
-
+        <div id="plots"></div>
     </div>
-</body>
-</html>
+{% endblock %}
+
+
