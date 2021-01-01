@@ -3,10 +3,12 @@ import statsmodels.api as sm
 import pandas as pd
 import matplotlib.pyplot as plt
 import pandas_datareader as pdr
-from create_plots import get_stock
+from create_plots import get_stock, test
 import random
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import plotly
+import plotly.graph_objs as go
 
 
 app = Flask(__name__)
@@ -35,7 +37,11 @@ def prediction(stock):
     FigureCanvas(fig).print_png(output)
     stock_name = 'The stock name is ' + str(stock)
     plot_image = f'/plot.png?stock={stock}'
-    return render_template('prediction.html', stock_name=stock_name, plot_image=plot_image)
+    graphJSON = test(stock, 'Open')
+    return render_template('prediction.html',
+                           stock_name=stock_name,
+                           plot_image=plot_image,
+                           graphJSON=graphJSON)
 
 
 # From https://stackoverflow.com/questions/50728328/python-how-to-show-matplotlib-in-flask
