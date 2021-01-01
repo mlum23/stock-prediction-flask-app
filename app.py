@@ -9,8 +9,8 @@ import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 
-
 app = Flask(__name__)
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -46,6 +46,7 @@ def plot_png():
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
