@@ -4,19 +4,43 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-<h1>Prediction</h1>
-<a href="{{url_for('index')}}"><button>Back</button></a>
-<p>{{stock_name}}</p>
-<img src="{{plot_image}}" />
-<div id="chart"></div>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-<script type="text/javascript">
+  <h1>Prediction</h1>
+  <a href="{{url_for('index')}}"><button>Back</button></a>
+  <h1>{{stock_name}}</h1>
 
-    var graphs = {{ graphJSON | safe }};
-    Plotly.plot('chart',graphs,{});
+  <h2>Open Price</h2>
+  <div id="open-graph"></div>
 
-</script>
+  <h2>Close Price</h2>
+  <div id="close-graph"></div>
+
+  <h2>High Price</h2>
+  <div id="high-graph"></div>
+
+  <h2>Low Price</h2>
+  <div id="low-graph"></div>
+
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script type="text/javascript">
+
+      var open_graph = {{ graphJSON_open | safe }};
+      Plotly.plot('open-graph',open_graph,{});
+
+      var close_graph = {{ graphJSON_close | safe }};
+      Plotly.plot('close-graph',close_graph,{});
+
+      var high_graph = {{ graphJSON_high | safe }};
+      Plotly.plot('high-graph',high_graph,{});
+
+      var low_graph = {{ graphJSON_low | safe }};
+      Plotly.plot('low-graph',low_graph,{});
+
+
+
+
+  </script>
 
 
 {% endblock %}

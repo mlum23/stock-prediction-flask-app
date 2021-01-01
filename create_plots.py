@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 import plotly.graph_objects as go
 import json
 import plotly
+import datetime
 
 
 def prediction(stock_name, category):
@@ -31,19 +32,8 @@ def prediction(stock_name, category):
     return pred[0]
 
 
-def get_stock(stock_name, category):
-    stock = pdr.get_data_yahoo(stock_name)[category]
-    stock_last_30_days = stock[len(stock) - 30:len(stock)]
-
-    fig = plt.Figure()
-    axis = fig.add_subplot(1, 1, 1)
-    axis.plot(stock_last_30_days)
-    axis.set_title(f'{category} Price of {stock_name.upper()}')
-    return fig
-
-
 #  https://plotly.com/python/range-slider/
-def test(stock_name, category):
+def get_stock(stock_name, category):
     df = pdr.get_data_yahoo(stock_name)
     fig = go.Figure()
     fig.add_trace(
@@ -51,7 +41,7 @@ def test(stock_name, category):
 
     # Set title
     fig.update_layout(
-        title_text="Time series with range slider and selectors"
+        title_text=f'{stock_name.upper()} {category} Stock Price'
     )
     fig.update_layout(
         xaxis=dict(
@@ -77,15 +67,20 @@ def test(stock_name, category):
                 ])
             ),
             rangeslider=dict(
-                visible=True
+                visible=True,
             ),
-            type="date"
+            type="date",
         )
     )
+    start_date = datetime.datetime.now() - datetime.timedelta(30)
+    initial_range = [
+        start_date, datetime.datetime.now()
+    ]
 
+    fig['layout']['xaxis'].update(range=initial_range)
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
-print(test('MSFT', 'Close'))
+
 
