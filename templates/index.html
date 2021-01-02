@@ -4,17 +4,46 @@
   {{ super() }}
 {% endblock %}
 {% block content %}
-    <div id="container">
-        <h1>Stock Predictions</h1>
 
-        <p><strong>Enter stock name:</strong></p>
-        <form method="POST">
-            <input name="stock-name">
-            <input type="submit">
-            <p>{{error}}</p>
-        </form>
-        <div id="plots"></div>
-    </div>
+    <h1>Stock Predictions</h1>
+
+    <p><strong>Enter stock name:</strong></p>
+    <form method="POST">
+        <input name="stock-name" value="{{stock_name}}">
+        <input type="submit">
+        <p>{{error}}</p>
+    </form>
+
+    <h2 class="stock-category">Open Price</h2>
+    <div id="open-graph"></div>
+
+    <h2 class="stock-category">Close Price</h2>
+    <div id="close-graph"></div>
+
+    <h2 class="stock-category">High Price</h2>
+    <div id="high-graph"></div>
+
+    <h2 class="stock-category">Low Price</h2>
+    <div id="low-graph"></div>
+
+
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+      <script type="text/javascript">
+          var open_graph = {{ graphJSON_open | safe }};
+          Plotly.plot('open-graph',open_graph,{});
+
+          var close_graph = {{ graphJSON_close | safe }};
+          Plotly.plot('close-graph',close_graph,{});
+
+          var high_graph = {{ graphJSON_high | safe }};
+          Plotly.plot('high-graph',high_graph,{});
+
+          var low_graph = {{ graphJSON_low | safe }};
+          Plotly.plot('low-graph',low_graph,{});
+      </script>
+
+
 {% endblock %}
 
 
