@@ -1,6 +1,11 @@
 body {
     font-family: 'Lato', sans-serif;
     background: lightyellow;
+    display: grid;
     place-items: center;
     text-align: center;
+}
+#container {
+    display: flex;
+    place-items: center;
 }
