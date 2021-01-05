@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, request, Response
 import pandas_datareader as pdr
+from pandas_datareader._utils import RemoteDataError
 from create_plots import get_stock
 import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -13,7 +14,7 @@ def index():
         stock_name = request.form['stock-name']
         try:
             pdr.get_data_yahoo(stock_name)
-        except (TypeError, KeyError):
+        except (TypeError, KeyError, RemoteDataError):
             error = "Stock name does not exist"
             return render_template("index.html", error=error)
         else:

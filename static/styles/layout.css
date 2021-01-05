@@ -4,8 +4,31 @@ body {
     display: grid;
     place-items: center;
     text-align: center;
+    min-font-size: 16px;
 }
 #container {
     display: flex;
     place-items: center;
+}
+
+#loading img {
+    width: 100vw;
+    height: 90vh;
+    overflow: hidden;
+}
+
+
+@media screen and (max-width: 713px) {
+    .stock-graph {
+        transform: scaleX(0.85);
+    }
+    text {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .stock-graph {
+        transform: scaleX(0.55);
+    }
 }

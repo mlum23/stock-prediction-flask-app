@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block title %}Index{% endblock %}
 {% block head %}
-  {{ super() }}
+    {{ super() }}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 {% endblock %}
 {% block content %}
 
@@ -10,40 +11,50 @@
     <p><strong>Enter stock name:</strong></p>
     <form method="POST">
         <input name="stock-name" value="{{stock_name}}">
-        <input type="submit">
+        <input type="submit" onclick="submitOnClick()">
         <p>{{error}}</p>
     </form>
 
-    <h2 class="stock-category">Open Price</h2>
+    <div id="loading" style="display: none;"><img src="{{url_for('static', filename='img/loading.gif') }}" alt="" /></div>
 
-    <div id="open-graph"></div>
+    <div id="graph-container">
+        <h2 class="stock-category">Open Price</h2>
+        <div id="open-graph" class="stock-graph"></div>
 
-    <h2 class="stock-category">Close Price</h2>
-    <div id="close-graph"></div>
+        <h2 class="stock-category">Close Price</h2>
+        <div id="close-graph" class="stock-graph"></div>
 
-    <h2 class="stock-category">High Price</h2>
-    <div id="high-graph"></div>
+        <h2 class="stock-category">High Price</h2>
+        <div id="high-graph" class="stock-graph"></div>
 
-    <h2 class="stock-category">Low Price</h2>
-    <div id="low-graph"></div>
+        <h2 class="stock-category">Low Price</h2>
+        <div id="low-graph" class="stock-graph"></div>
+    </div>
 
 
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script type="text/javascript">
+      const submitOnClick = () => {
+          $('#loading').show();
+          document.getElementById("graph-container").style.display = "none";
+      }
 
-      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-      <script type="text/javascript">
-          var open_graph = {{ graphJSON_open | safe }};
-          Plotly.plot('open-graph',open_graph,{});
+  </script>
+  <script type="text/javascript">
+      var open_graph = {{ graphJSON_open | safe }};
+      Plotly.plot('open-graph',open_graph,{});
 
-          var close_graph = {{ graphJSON_close | safe }};
-          Plotly.plot('close-graph',close_graph,{});
+      var close_graph = {{ graphJSON_close | safe }};
+      Plotly.plot('close-graph',close_graph,{});
 
-          var high_graph = {{ graphJSON_high | safe }};
-          Plotly.plot('high-graph',high_graph,{});
+      var high_graph = {{ graphJSON_high | safe }};
+      Plotly.plot('high-graph',high_graph,{});
 
-          var low_graph = {{ graphJSON_low | safe }};
-          Plotly.plot('low-graph',low_graph,{});
-      </script>
+      var low_graph = {{ graphJSON_low | safe }};
+      Plotly.plot('low-graph',low_graph,{});
+  </script>
+
 
 
 {% endblock %}

@@ -38,7 +38,8 @@ def get_stock(stock_name, category):
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(x=list(df.index), y=list(df[category])))
-    fig.update_layout(autosize=True, height=450, margin=dict(pad=5))
+    fig.update_layout(autosize=False, margin=dict(pad=5))
+
     # Set title
     fig.update_layout(
         title_text=f'{stock_name.upper()} {category} Stock Price',
