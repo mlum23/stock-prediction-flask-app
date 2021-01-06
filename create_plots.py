@@ -38,7 +38,7 @@ def get_stock(stock_name, category):
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(x=list(df.index), y=list(df[category])))
-    fig.update_layout(autosize=False, margin=dict(pad=5))
+    fig.update_layout(autosize=False)
 
     # Set title
     fig.update_layout(

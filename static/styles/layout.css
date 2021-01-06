@@ -1,10 +1,15 @@
 body {
     font-family: 'Lato', sans-serif;
-    background: lightyellow;
+    color: white;
+    background: #191f26;
     display: grid;
     place-items: center;
     text-align: center;
     min-font-size: 16px;
+}
+
+input {
+    font-size: 20px;
 }
 #container {
     display: flex;
