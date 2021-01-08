@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}How Predictions Are Made{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>How are predictions made?</h1>
+    <a href={{url_for('index')}}>Back to main page</a>
+    <div id="about-container">
+        <p>
+            Predictions are being made with a simple linear regression model. Every time a submission
+            is made, the backend is creating a model with a 80-20 train-test split on the
+            <a href="https://ca.finance.yahoo.com/"> Yahoo Finance</a> stock data going back up to 5 years. That is,
+            80% of the dataset (chosen randomly) is used for training the model, while the other 20% is used for
+            validating the model.
+        </p>
+        <br />
+        <p>
+            Some advantages of linear regression is that it is simple to implement and is computationally
+            efficient. Some disadvantages include being prone to outliers and underfitting.
+        </p>
+    </div>
+
+{% endblock %}

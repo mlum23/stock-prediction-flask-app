@@ -26,13 +26,13 @@ def predict_next_day(stock_name, category):
 
     pred = model.predict(x_forecast)
 
-    return round(pred[0], 2)
+    return f'{pred[0]: 0.2f}'
 
 
 #  https://plotly.com/python/range-slider/
 def get_stock(stock_name, category):
     df = pdr.get_data_yahoo(stock_name)
-    current_price = round(df[category][-1], 2)
+    current_price = f'{df[category][-1]: .2f}'
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(x=list(df.index), y=list(df[category])))

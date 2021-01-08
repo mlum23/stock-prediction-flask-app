@@ -12,9 +12,10 @@
     <form method="POST">
         <input name="stock-name" value="{{stock_name}}">
         <input type="submit" onclick="submitOnClick()">
-        <p>{{error}}</p>
     </form>
-
+        <br/>
+        <a href={{url_for('about')}}>How are predictions being made?</a>
+        <p>{{error}}</p>
     <div id="loading" class="lds-roller" style="display: none;">
         <div></div>
         <div></div>

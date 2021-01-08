@@ -9,6 +9,19 @@ body {
     min-font-size: 16px;
 }
 
+a, a:visited {
+    color: hotpink;
+}
+
+#about-container {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#about-container p {
+    font-size: 1.5rem;
+}
+
 input {
     font-size: 22px;
 }
