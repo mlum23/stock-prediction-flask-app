@@ -15,19 +15,37 @@
         <p>{{error}}</p>
     </form>
 
-    <div id="loading" style="display: none;"><img src="{{url_for('static', filename='img/loading.gif') }}" alt="" /></div>
+    <div id="loading" class="lds-roller" style="display: none;">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div
+        ><div></div>
+    </div>
 
-    <div id="graph-container">
+    <div id="graph-container" style="{{graph_container_style}}">
+        <h1>Most recent stock date: {{stock_date}}</h1>
         <h2 class="stock-category">Open Price</h2>
+        <p>Latest Open Price: ${{open_price}}</p>
+        <p>Next Day Prediction: ${{open_prediction}}</p>
         <div id="open-graph" class="stock-graph"></div>
 
         <h2 class="stock-category">Close Price</h2>
+        <p>Latest Close Price: ${{close_price}}</p>
+        <p>Next Day Prediction: ${{close_prediction}}</p>
         <div id="close-graph" class="stock-graph"></div>
 
         <h2 class="stock-category">High Price</h2>
+        <p>Latest High Price: ${{high_price}}</p>
+        <p>Next Day Prediction: ${{high_prediction}}</p>
         <div id="high-graph" class="stock-graph"></div>
 
         <h2 class="stock-category">Low Price</h2>
+        <p>Latest Low Price: ${{low_price}}</p>
+        <p>Next Day Prediction: ${{low_prediction}}</p>
         <div id="low-graph" class="stock-graph"></div>
     </div>
 

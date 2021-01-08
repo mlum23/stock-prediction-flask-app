@@ -1,6 +1,3 @@
-import statsmodels.api as sm
-import pandas as pd
-import matplotlib.pyplot as plt
 import pandas_datareader as pdr
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -11,7 +8,7 @@ import plotly
 import datetime
 
 
-def prediction(stock_name, category):
+def predict_next_day(stock_name, category):
     df = pdr.get_data_yahoo(stock_name)
     forecast_out = 1  # One day prediction
     df['Prediction'] = df[[category]].shift(-forecast_out)
@@ -29,12 +26,13 @@ def prediction(stock_name, category):
 
     pred = model.predict(x_forecast)
 
-    return pred[0]
+    return round(pred[0], 2)
 
 
 #  https://plotly.com/python/range-slider/
 def get_stock(stock_name, category):
     df = pdr.get_data_yahoo(stock_name)
+    current_price = round(df[category][-1], 2)
     fig = go.Figure()
     fig.add_trace(
         go.Scatter(x=list(df.index), y=list(df[category])))
@@ -82,7 +80,7 @@ def get_stock(stock_name, category):
     fig['layout']['xaxis'].update(range=initial_range)
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
+    return graphJSON, current_price
 
 
 
