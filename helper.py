@@ -9,6 +9,17 @@ import datetime
 
 
 def predict_next_day(stock_name, category):
+    """
+    Returns the next day price.
+
+    This function creates a Linear Regression model with a 80/20 train/test split
+    to predict the next day price of a category.
+
+    :precondition: category must be the string "open", "close", "high", or "low"
+    :param stock_name: the name of the stock, as a string
+    :param category: either the strings "open", "close", "high", or "low"
+    :return: the predicted prices, as a string
+    """
     df = pdr.get_data_yahoo(stock_name)
     forecast_out = 1  # One day prediction
     df['Prediction'] = df[[category]].shift(-forecast_out)
@@ -31,6 +42,14 @@ def predict_next_day(stock_name, category):
 
 #  https://plotly.com/python/range-slider/
 def get_stock(stock_name, category):
+    """
+    Returns the current price and JSON object containing the Plotly graph.
+
+    :precondition: category must be the string "open", "close", "high", or "low"
+    :param stock_name: the name of the stock, as a string
+    :param category: either the strings "open", "close", "high", or "low"
+    :return:
+    """
     df = pdr.get_data_yahoo(stock_name)
     current_price = f'{df[category][-1]: .2f}'
     fig = go.Figure()
