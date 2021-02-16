@@ -15,7 +15,7 @@ def index():
             date = str(pdr.get_data_yahoo(stock_name).index[-1]).split(' ')[0]
         except (TypeError, KeyError, RemoteDataError):
             error = "Stock name does not exist"
-            return render_template("index.html", error=error)
+            return render_template("index.html", error=error, graph_container_style="display: none;")
         else:
             graphJSON_open, open_price = get_stock(stock_name, 'Open')
             graphJSON_close, close_price = get_stock(stock_name, 'Close')
