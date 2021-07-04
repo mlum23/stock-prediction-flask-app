@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pandas_datareader as pdr
 from pandas_datareader._utils import RemoteDataError
 from helper import get_stock, predict_next_day
+import yfinance as yf
 
 
 app = Flask(__name__)
@@ -12,10 +13,17 @@ def index():
     if request.method == 'POST':
         stock_name = request.form['stock-name'].replace(' ', '')
         try:
+            yf.pdr_override()
             date = str(pdr.get_data_yahoo(stock_name).index[-1]).split(' ')[0]
-        except (TypeError, KeyError, RemoteDataError):
+            # data = yf.Ticker(stock_name)
+        except (TypeError, KeyError):
             error = "Stock name does not exist"
             return render_template("index.html", error=error, graph_container_style="display: none;")
+
+        except RemoteDataError:
+            error = "There was an error retrieving the data"
+            return render_template("index.html", error=error, graph_container_style="display: none;")
+
         else:
             graphJSON_open, open_price = get_stock(stock_name, 'Open')
             graphJSON_close, close_price = get_stock(stock_name, 'Close')
